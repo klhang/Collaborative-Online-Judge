@@ -1,0 +1,21 @@
+{
+  "name": "enter",
+  "version": "1.0.0",
+  "description": "enter",
+  "main": "index.js",
+  "scripts": {
+    "test": "enter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "enter"
+  },
+  "keywords": [
+    "enter"
+  ],
+  "author": "enter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
