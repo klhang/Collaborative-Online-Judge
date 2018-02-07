@@ -4,7 +4,8 @@
   "description": "enter",
   "main": "index.js",
   "scripts": {
-    "test": "enter"
+    "test": "enter",
+    "star": "nodemon server.js"
   },
   "repository": {
     "type": "git",
