@@ -13,6 +13,8 @@ import { NewProblemComponent } from './components/new-problem/new-problem.compon
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FilterProblemComponent } from './components/filter-problem/filter-problem.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { FilterProblemComponent } from './components/filter-problem/filter-probl
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     DataService

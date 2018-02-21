@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Problem } from '../../models/problem.model';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DataService } from '../../services/data.service';
 
@@ -11,6 +12,7 @@ import { DataService } from '../../services/data.service';
 export class ProblemListComponent implements OnInit {
 
   problems: Problem[];
+  subscriptionProblems: Subscription;
 
   constructor(private dataService: DataService) { }
 
@@ -19,7 +21,9 @@ export class ProblemListComponent implements OnInit {
   }
 
   getProblems() {
-    this.problems = this.dataService.getProblems();
+    // this.problems = this.dataService.getProblems();
+    this.subscriptionProblems = this.dataService.getProblems()
+      .subscribe(problems => this.problems = problems);
   }
 
 }
