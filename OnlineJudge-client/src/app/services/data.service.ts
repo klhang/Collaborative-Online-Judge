@@ -49,8 +49,8 @@ export class DataService {
           this._problemSource.next(res);
         })
         .catch(this.handleError);
+      // return this._problemSource.asObservable();
       return this._problemSource.asObservable();
-      // return this.problems.filter((problem) => problem.difficulty === difficulty);
     }
 
   private handleError(error: any): Promise<any> {

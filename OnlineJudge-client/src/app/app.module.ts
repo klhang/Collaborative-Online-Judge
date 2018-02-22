@@ -14,6 +14,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FilterProblemComponent } from './components/filter-problem/filter-problem.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { EditorComponent } from './components/editor/editor.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProblemDetailComponent,
     NewProblemComponent,
     NavBarComponent,
-    FilterProblemComponent
+    FilterProblemComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
