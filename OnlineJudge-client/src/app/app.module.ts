@@ -16,6 +16,7 @@ import { FilterProblemComponent } from './components/filter-problem/filter-probl
 import { HttpClientModule } from '@angular/common/http';
 import { EditorComponent } from './components/editor/editor.component';
 
+import { CollaborationService } from './services/collaboration.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditorComponent } from './components/editor/editor.component';
     HttpClientModule
   ],
   providers: [
-    DataService
+    DataService,
+    CollaborationService
   ],
   bootstrap: [AppComponent]
 })

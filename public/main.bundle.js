@@ -97,6 +97,8 @@ var new_problem_component_1 = __webpack_require__("../../../../../src/app/compon
 var nav_bar_component_1 = __webpack_require__("../../../../../src/app/components/nav-bar/nav-bar.component.ts");
 var filter_problem_component_1 = __webpack_require__("../../../../../src/app/components/filter-problem/filter-problem.component.ts");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var editor_component_1 = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
+var collaboration_service_1 = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -108,7 +110,8 @@ var AppModule = /** @class */ (function () {
                 problem_detail_component_1.ProblemDetailComponent,
                 new_problem_component_1.NewProblemComponent,
                 nav_bar_component_1.NavBarComponent,
-                filter_problem_component_1.FilterProblemComponent
+                filter_problem_component_1.FilterProblemComponent,
+                editor_component_1.EditorComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -117,7 +120,8 @@ var AppModule = /** @class */ (function () {
                 http_1.HttpClientModule
             ],
             providers: [
-                data_service_1.DataService
+                data_service_1.DataService,
+                collaboration_service_1.CollaborationService
             ],
             bootstrap: [app_component_1.AppComponent]
         })
@@ -168,6 +172,91 @@ var routes = [
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(routes);
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/editor/editor.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "@media screen {\n    #editor {\n        height: 600px;\n    }\n    .lang-select {\n        width: 100px;\n        margin-right: 10px;\n    }\n    header .btn {\n        margin: 0 5px;\n    }\n    footer .btn {\n        margin: 0 5px;\n    }\n\n    .editor-footer, .editor-header {\n        margin: 10px 0;\n    }\n    .cursor {\n        /*position absolute*/\n        background: rgba(0, 250, 0, 0.5);\n        z-index: 40;\n        width: 2px !important;\n    }\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/editor/editor.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<section>\n  <header class=\"editor-header\">\n    <!-- for select language-->\n    <!-- when change, call setLanguage(language)-->\n    <select class=\"form-control pull-left lang-select\" name=\"language\"\n    [(ngModel)]=\"language\" (change)=\"setLanguage(language)\">\n    <option *ngFor=\"let language of languages\" [value]=\"language\">\n      {{language}}\n    </option>\n  </select>\n  <!-- reset button -->\n  <!-- Button trigger modal -->\n  <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n    Reset\n  </button>\n\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Are you sure</h5>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n          You will lose current code in the editor, are you sure?\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n          (click)=\"resetEditor()\">Reset</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  </header>\n  <div class=\"row\">\n    <div id=\"editor\">\n    </div>\n  </div><!-- This is the body -->\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\"\n    (click)=\"submit()\">Submit Solution</button>\n  </footer>\n</section>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/editor/editor.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var collaboration_service_1 = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
+var EditorComponent = /** @class */ (function () {
+    function EditorComponent(collaboration) {
+        this.collaboration = collaboration;
+        this.languages = ['Java', 'Python'];
+        this.language = 'Java';
+        this.defaultContent = {
+            'Java': "public class Example {\n      public static void main(String[] args) {\n        // Type your Java code here.\n      }\n    }",
+            'Python': "class solution:\n      def example():\n        # write your python code here.\n    "
+        };
+    }
+    EditorComponent.prototype.ngOnInit = function () {
+        // "editor" is the id in html
+        this.editor = ace.edit("editor");
+        this.editor.setTheme("ace/theme/eclipse");
+        this.resetEditor();
+    };
+    EditorComponent.prototype.resetEditor = function () {
+        this.editor.setValue(this.defaultContent[this.language]);
+        this.editor.getSession().setMode("ace/mode/" + this.language.toLowerCase());
+    };
+    EditorComponent.prototype.setLanguage = function (language) {
+        this.language = language;
+        this.resetEditor();
+    };
+    EditorComponent.prototype.submit = function () {
+        var user_code = this.editor.getValue();
+        console.log(user_code);
+    };
+    EditorComponent = __decorate([
+        core_1.Component({
+            selector: 'app-editor',
+            template: __webpack_require__("../../../../../src/app/components/editor/editor.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/editor/editor.component.css")]
+        }),
+        __metadata("design:paramtypes", [collaboration_service_1.CollaborationService])
+    ], EditorComponent);
+    return EditorComponent;
+}());
+exports.EditorComponent = EditorComponent;
 
 
 /***/ }),
@@ -270,7 +359,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/nav-bar/nav-bar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Online Judge</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\"><a href=\"/problems\">All Problems<span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"/new\">Creat Problem</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Select Difficulty <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"/filter/easy\">Easy</a></li>\n            <li><a href=\"/filter/medium\">medium</a></li>\n            <li><a href=\"/filter/hard\">Hard</a></li>\n            <li><a href=\"/filter/super\">Super</a></li>\n            <!-- <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">One more separated link</a></li> -->\n          </ul>\n        </li>\n      </ul>\n      <form class=\"navbar-form navbar-left\">\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n      </form>\n      <!-- <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul> -->\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">Online Judge</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\"><a href=\"/problems\">All Problems<span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"/new\">Creat Problem</a></li>\n        <!-- <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Select Difficulty <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"/filter/easy\">Easy</a></li>\n            <li><a href=\"/filter/medium\">medium</a></li>\n            <li><a href=\"/filter/hard\">Hard</a></li>\n            <li><a href=\"/filter/super\">Super</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li> -->\n      </ul>\n      <form class=\"navbar-form navbar-left\">\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n      </form>\n      <!-- <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul> -->\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n"
 
 /***/ }),
 
@@ -408,7 +497,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/problem-detail/problem-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"problem\">\n\t\t<div class=\"col-sm-12\tcol-md-4\">\n        <div>\n\t\t\t\t\t\t<h2>\n\t\t\t\t\t\t\t\t{{problem.id}}.{{problem.name}}\n\t\t\t\t\t\t</h2>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t{{problem.desc}}\n\t\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t</div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"problem\">\n\t\t<div class=\"col-sm-12\tcol-md-4\">\n        <div>\n\t\t\t\t\t\t<h2>\n\t\t\t\t\t\t\t\t{{problem.id}}.{{problem.name}}\n\t\t\t\t\t\t</h2>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t{{problem.desc}}\n\t\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"hidden-xs col-sm-12 col-md-8\">\n\t\t\t<app-editor></app-editor>\n\t\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -529,6 +618,42 @@ exports.ProblemListComponent = ProblemListComponent;
 
 /***/ }),
 
+/***/ "../../../../../src/app/services/collaboration.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var CollaborationService = /** @class */ (function () {
+    function CollaborationService() {
+    }
+    CollaborationService.prototype.init = function (editor, sessionId) {
+        this.collaborationSocket = io(window.location.origin, { query: 'message=haha' });
+        this.collaborationSocket.on('message', function (message) {
+            console.log('message received from the server: ' + message);
+        });
+    };
+    CollaborationService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], CollaborationService);
+    return CollaborationService;
+}());
+exports.CollaborationService = CollaborationService;
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/services/data.service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -589,8 +714,8 @@ var DataService = /** @class */ (function () {
             _this._problemSource.next(res);
         })
             .catch(this.handleError);
+        // return this._problemSource.asObservable();
         return this._problemSource.asObservable();
-        // return this.problems.filter((problem) => problem.difficulty === difficulty);
     };
     DataService.prototype.handleError = function (error) {
         console.error('an error occured', error);
