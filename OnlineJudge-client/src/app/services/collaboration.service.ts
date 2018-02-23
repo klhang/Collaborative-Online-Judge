@@ -28,4 +28,8 @@ export class CollaborationService {
     this.collaborationSocket.emit("change", delta);
   }
 
+  restoreBuffer(): void {
+    this.collaborationSocket.emit("restoreBuffer");
+  }
+
 }

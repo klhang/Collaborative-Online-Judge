@@ -235,6 +235,7 @@ var EditorComponent = /** @class */ (function () {
         this.route.params.subscribe(function (params) {
             _this.sessionId = params['id'];
             _this.initEditor();
+            _this.collaboration.restoreBuffer();
         });
     };
     EditorComponent.prototype.initEditor = function () {
@@ -673,6 +674,9 @@ var CollaborationService = /** @class */ (function () {
     CollaborationService.prototype.change = function (delta) {
         //emit change envent
         this.collaborationSocket.emit("change", delta);
+    };
+    CollaborationService.prototype.restoreBuffer = function () {
+        this.collaborationSocket.emit("restoreBuffer");
     };
     CollaborationService = __decorate([
         core_1.Injectable(),
