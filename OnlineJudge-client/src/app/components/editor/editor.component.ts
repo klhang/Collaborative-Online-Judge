@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CollaborationService } from '../../services/collaboration.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 declare var ace: any;
 
@@ -14,7 +15,10 @@ export class EditorComponent implements OnInit {
   languages: string[] = ['Java', 'Python'];
   language: string = 'Java';
 
-  constructor(private collaboration: CollaborationService) { }
+  sessionId: string;
+
+  constructor(private collaboration: CollaborationService,
+              private route: ActivatedRoute) { }
 
   defaultContent = {
     'Java': `public class Example {
@@ -29,10 +33,29 @@ export class EditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    // "editor" is the id in html
+    this.route.params.subscribe(params => {
+      this.sessionId = params['id'];
+      this.initEditor();
+    })
+  }
+
+  initEditor(): void {
     this.editor = ace.edit("editor");
     this.editor.setTheme("ace/theme/eclipse");
     this.resetEditor();
+
+    //setup collaboration socket;
+    this.collaboration.init(this.editor, this.sessionId);
+    this.editor.lastAppliedChange = null;
+
+    //register change callback
+    this.editor.on("change", e => {
+      console.log('editor changes:' + JSON.stringify(e));
+      if (this.editor.lastAppliedChange != e) {
+        this.collaboration.change(JSON.stringify(e));
+      }
+
+    })
   }
 
   resetEditor(): void {
