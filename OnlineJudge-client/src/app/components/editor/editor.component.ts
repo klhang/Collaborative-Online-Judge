@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CollaborationService } from '../../services/collaboration.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DataService } from '../../services/data.service';
+import { Subscription } from 'rxjs/Subscription';
 
 declare var ace: any;
 
@@ -16,9 +18,14 @@ export class EditorComponent implements OnInit {
   language: string = 'Java';
 
   sessionId: string;
+  output: string = "";
+
+  users: string;
+  subscriptionUsers: Subscription;
 
   constructor(private collaboration: CollaborationService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private dataService: DataService) { }
 
   defaultContent = {
     'Java': `public class Example {
@@ -45,8 +52,10 @@ export class EditorComponent implements OnInit {
     this.editor.setTheme("ace/theme/eclipse");
     this.resetEditor();
 
-    //setup collaboration socket;
-    this.collaboration.init(this.editor, this.sessionId);
+    // setup collaboration socket
+    this.subscriptionUsers = this.collaboration.init(this.editor, this.sessionId)
+      .subscribe(users => this.users = users);
+
     this.editor.lastAppliedChange = null;
 
     //register change callback
@@ -71,9 +80,21 @@ export class EditorComponent implements OnInit {
     this.resetEditor();
   }
 
+  // submit
   submit(): void {
     let user_code = this.editor.getValue();
     console.log(user_code);
+
+    const data = {
+      user_code: user_code,
+      lang: this.language.toLocaleLowerCase()
+    };
+
+    this.dataService.buildAndRun(data)
+      .then(res => {
+        this.output = res;
+        console.log(this.output);
+      });
   }
 
 }

@@ -9,10 +9,10 @@ import { Problem } from '../models/problem.model';
 export class DataService {
   private _problemSource = new BehaviorSubject<Problem[]>([]);
 
-  constructor(private httpclient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getProblems(): Observable<Problem[]> {
-    this.httpclient.get('api/v1/problems')
+    this.httpClient.get('api/v1/problems')
       .toPromise()
       .then((res:any) => {
         this._problemSource.next(res);
@@ -22,35 +22,46 @@ export class DataService {
   }
 
   getProblem(id: number): Promise<Problem> {
-    return this.httpclient.get(`api/v1/problems/${id}`)
+    return this.httpClient.get(`api/v1/problems/${id}`)
       .toPromise()
       .then((res:any) => res)
       .catch(this.handleError);
   }
 
   addProblem(problem: Problem) {
-    const options = { header: new HttpHeaders( {
-      'Content-Type': 'application/json'
-    })};
+     // problem.id = this.problems.length + 1;
+     // this.problems.push(problem);
+     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
+     return this.httpClient.post('api/v1/problems', problem, options)
+       .toPromise()
+       .then((res: any) => {
+         this.getProblems();
 
-    return this.httpclient.get('api/v1/problems')
-      .toPromise()
-      .then((res: any) => {
-        this.getProblems();
-        return res;
-      })
-      .catch(this.handleError);
-  }
+         return res;
+       })
+       .catch(this.handleError);
+   }
 
     filterProblems(difficulty: string): Observable<Problem[]> {
-      this.httpclient.get('api/v1/problems')
+      this.httpClient.get('api/v1/problems')
         .toPromise()
         .then((res:any) => {
           this._problemSource.next(res);
         })
         .catch(this.handleError);
-      // return this._problemSource.asObservable();
       return this._problemSource.asObservable();
+    }
+
+    buildAndRun(data) : Promise<any> {
+      const options = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+
+      return this.httpClient.post('api/v1/build_and_run', data, options)
+        .toPromise()
+        .then(res => {
+          console.log(res);
+          return res;
+        })
+        .catch(this.handleError);
     }
 
   private handleError(error: any): Promise<any> {

@@ -20,6 +20,10 @@ export class ProblemListComponent implements OnInit {
     this.getProblems();
   }
 
+  ngOnDestroy() {
+    this.subscriptionProblems.unsubscribe();
+  }
+
   getProblems() {
     // this.problems = this.dataService.getProblems();
     this.subscriptionProblems = this.dataService.getProblems()

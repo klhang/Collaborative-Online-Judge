@@ -197,7 +197,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/editor/editor.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section>\n  <header class=\"editor-header\">\n    <!-- for select language-->\n    <!-- when change, call setLanguage(language)-->\n    <select class=\"form-control pull-left lang-select\" name=\"language\"\n    [(ngModel)]=\"language\" (change)=\"setLanguage(language)\">\n    <option *ngFor=\"let language of languages\" [value]=\"language\">\n      {{language}}\n    </option>\n  </select>\n  <!-- reset button -->\n  <!-- Button trigger modal -->\n  <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n    Reset\n  </button>\n\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n    <div class=\"modal-dialog\" role=\"document\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <h5 class=\"modal-title\" id=\"exampleModalLabel\">Are you sure</h5>\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n        </div>\n        <div class=\"modal-body\">\n          You will lose current code in the editor, are you sure?\n        </div>\n        <div class=\"modal-footer\">\n          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n          <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n          (click)=\"resetEditor()\">Reset</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  </header>\n  <div class=\"row\">\n    <div id=\"editor\">\n    </div>\n  </div><!-- This is the body -->\n  <footer class=\"editor-footer\">\n    <button type=\"button\" class=\"btn btn-success pull-right\"\n    (click)=\"submit()\">Submit Solution</button>\n  </footer>\n</section>\n"
+module.exports = "<section>\n  <header class=\"editor-header\">\n    <select class=\"form-control pull-left lang-select\" name=\"language\"\n     [(ngModel)]=\"language\" (change)=\"setLanguage(language)\">\n     <option *ngFor=\"let language of languages\" [value]=\"language\">\n       {{language}}\n     </option>\n    </select>\n    <!--reset button -->\n    <!-- Button trigger modal -->\n    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#myModal\">\n      Reset\n    </button>\n\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n          <div class=\"modal-header\">\n            <h5 class=\"modal-title\" id=\"exampleModalLabel\">Are you sure</h5>\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n              <span aria-hidden=\"true\">&times;</span>\n            </button>\n          </div>\n          <div class=\"modal-body\">\n            You will lose current code in the editor, are you sure?\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Cancel</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\"\n            (click)=\"resetEditor()\">Reset</button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </header>\n  <div class=\"row\">\n    <div id=\"editor\">\n    </div>\n    <div>\n      {{output}}\n    </div>\n    <div>\n      {{users}}\n    </div>\n  </div><!-- This is the body -->\n  <footer class=\"editor-footer\">\n      <button type=\"button\" class=\"btn btn-success pull-right\"\n      (click)=\"submit()\">Submit Solution</button>\n  </footer>\n</section>\n"
 
 /***/ }),
 
@@ -219,12 +219,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var collaboration_service_1 = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var data_service_1 = __webpack_require__("../../../../../src/app/services/data.service.ts");
 var EditorComponent = /** @class */ (function () {
-    function EditorComponent(collaboration, route) {
+    function EditorComponent(collaboration, route, dataService) {
         this.collaboration = collaboration;
         this.route = route;
+        this.dataService = dataService;
         this.languages = ['Java', 'Python'];
         this.language = 'Java';
+        this.output = "";
         this.defaultContent = {
             'Java': "public class Example {\n      public static void main(String[] args) {\n        // Type your Java code here.\n      }\n    }",
             'Python': "class solution:\n      def example():\n        # write your python code here.\n    "
@@ -243,8 +246,9 @@ var EditorComponent = /** @class */ (function () {
         this.editor = ace.edit("editor");
         this.editor.setTheme("ace/theme/eclipse");
         this.resetEditor();
-        //setup collaboration socket;
-        this.collaboration.init(this.editor, this.sessionId);
+        // setup collaboration socket
+        this.subscriptionUsers = this.collaboration.init(this.editor, this.sessionId)
+            .subscribe(function (users) { return _this.users = users; });
         this.editor.lastAppliedChange = null;
         //register change callback
         this.editor.on("change", function (e) {
@@ -262,9 +266,20 @@ var EditorComponent = /** @class */ (function () {
         this.language = language;
         this.resetEditor();
     };
+    // submit
     EditorComponent.prototype.submit = function () {
+        var _this = this;
         var user_code = this.editor.getValue();
         console.log(user_code);
+        var data = {
+            user_code: user_code,
+            lang: this.language.toLocaleLowerCase()
+        };
+        this.dataService.buildAndRun(data)
+            .then(function (res) {
+            _this.output = res;
+            console.log(_this.output);
+        });
     };
     EditorComponent = __decorate([
         core_1.Component({
@@ -273,7 +288,8 @@ var EditorComponent = /** @class */ (function () {
             styles: [__webpack_require__("../../../../../src/app/components/editor/editor.component.css")]
         }),
         __metadata("design:paramtypes", [collaboration_service_1.CollaborationService,
-            router_1.ActivatedRoute])
+            router_1.ActivatedRoute,
+            data_service_1.DataService])
     ], EditorComponent);
     return EditorComponent;
 }());
@@ -618,6 +634,9 @@ var ProblemListComponent = /** @class */ (function () {
     ProblemListComponent.prototype.ngOnInit = function () {
         this.getProblems();
     };
+    ProblemListComponent.prototype.ngOnDestroy = function () {
+        this.subscriptionProblems.unsubscribe();
+    };
     ProblemListComponent.prototype.getProblems = function () {
         var _this = this;
         // this.problems = this.dataService.getProblems();
@@ -655,11 +674,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var Subject_1 = __webpack_require__("../../../../rxjs/_esm5/Subject.js");
 var CollaborationService = /** @class */ (function () {
     function CollaborationService() {
+        this._userSource = new Subject_1.Subject();
     }
     //take two params
     CollaborationService.prototype.init = function (editor, sessionId) {
+        var _this = this;
         this.collaborationSocket = io(window.location.origin, { query: 'sessionId=' + sessionId });
         //handle the cahnges sent from server
         this.collaborationSocket.on('change', function (delta) {
@@ -669,12 +691,18 @@ var CollaborationService = /** @class */ (function () {
             // apply the changes on editor
             editor.getSession().getDocument().applyDeltas([delta]);
         });
+        this.collaborationSocket.on("userchange", function (data) {
+            console.log('collaboration: user changes ' + data);
+            _this._userSource.next(data.toString());
+        });
+        return this._userSource.asObservable();
     };
     //emit event to make changes and inform server and other collaborators
     CollaborationService.prototype.change = function (delta) {
         //emit change envent
         this.collaborationSocket.emit("change", delta);
     };
+    // send restoreBuffer request to server
     CollaborationService.prototype.restoreBuffer = function () {
         this.collaborationSocket.emit("restoreBuffer");
     };
@@ -708,13 +736,13 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 var DataService = /** @class */ (function () {
-    function DataService(httpclient) {
-        this.httpclient = httpclient;
+    function DataService(httpClient) {
+        this.httpClient = httpClient;
         this._problemSource = new BehaviorSubject_1.BehaviorSubject([]);
     }
     DataService.prototype.getProblems = function () {
         var _this = this;
-        this.httpclient.get('api/v1/problems')
+        this.httpClient.get('api/v1/problems')
             .toPromise()
             .then(function (res) {
             _this._problemSource.next(res);
@@ -723,17 +751,17 @@ var DataService = /** @class */ (function () {
         return this._problemSource.asObservable();
     };
     DataService.prototype.getProblem = function (id) {
-        return this.httpclient.get("api/v1/problems/" + id)
+        return this.httpClient.get("api/v1/problems/" + id)
             .toPromise()
             .then(function (res) { return res; })
             .catch(this.handleError);
     };
     DataService.prototype.addProblem = function (problem) {
         var _this = this;
-        var options = { header: new http_1.HttpHeaders({
-                'Content-Type': 'application/json'
-            }) };
-        return this.httpclient.get('api/v1/problems')
+        // problem.id = this.problems.length + 1;
+        // this.problems.push(problem);
+        var options = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post('api/v1/problems', problem, options)
             .toPromise()
             .then(function (res) {
             _this.getProblems();
@@ -743,14 +771,23 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.filterProblems = function (difficulty) {
         var _this = this;
-        this.httpclient.get('api/v1/problems')
+        this.httpClient.get('api/v1/problems')
             .toPromise()
             .then(function (res) {
             _this._problemSource.next(res);
         })
             .catch(this.handleError);
-        // return this._problemSource.asObservable();
         return this._problemSource.asObservable();
+    };
+    DataService.prototype.buildAndRun = function (data) {
+        var options = { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' }) };
+        return this.httpClient.post('api/v1/build_and_run', data, options)
+            .toPromise()
+            .then(function (res) {
+            console.log(res);
+            return res;
+        })
+            .catch(this.handleError);
     };
     DataService.prototype.handleError = function (error) {
         console.error('an error occured', error);
