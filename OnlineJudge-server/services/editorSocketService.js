@@ -16,10 +16,11 @@ module.exports = function(io) {
 
         socketIdToSessionId[socket.id] = sessionId;
 
-
+        //if a problem is being edited
         if (sessionId in collaborations) {
+            //first, join the participants
             collaborations[sessionId]['participants'].push(socket.id);
-
+            //find all the participants and emit userchange
             let participants = collaborations[sessionId]['participants'];
             for (let i = 0; i < participants.length; i++) {
                 io.to(participants[i]).emit("userchange", participants);
@@ -27,20 +28,23 @@ module.exports = function(io) {
         } else {
             // not in memory, check in redis
             redisClient.get(sessionPath + '/' + sessionId, function(data) {
+                // if data not expired and found
                 if (data) {
                     console.log("session terminated previously, get back from redis");
-
+                    // put data into collaborations object as cachedInstructions
                     collaborations[sessionId] = {
                         'cachedInstructions': JSON.parse(data),
                         'participants': []
                     }
                 } else {
+                    //if not found, just initiate cachedInstructions and set it to empty inside collaborations
                     console.log("creating new session");
                     collaborations[sessionId] = {
                         'cachedInstructions': [],
                         'participants': []
                     }
                 }
+                // Must put self into collaborations as the first participant.
                 collaborations[sessionId]['participants'].push(socket.id);
                 io.to(socket.id).emit("userchange", socket.id);
             })
@@ -49,15 +53,18 @@ module.exports = function(io) {
         // socket event listeners
         socket.on('change', delta => {
             console.log("change " + socketIdToSessionId[socket.id] + " " + delta);
+            // locate the right session(problem) by mapping socket.id to sesseionid
             let sessionId = socketIdToSessionId[socket.id];
             if (sessionId in collaborations) {
+                // first, add change into cachedInstructions
                 collaborations[sessionId]['cachedInstructions'].push(["change", delta, Date.now()]);
             }
 
             if (sessionId in collaborations) {
+              // second, find all the participants and emit change in content
                 let participants = collaborations[sessionId]['participants'];
-                console.log(collaborations)
-
+                // for debug ==>
+                // console.log(collaborations)
                 for (let i = 0; i < participants.length; i++) {
                     if (socket.id != participants[i]) {
                         io.to(participants[i]).emit("change", delta);
@@ -117,11 +124,13 @@ module.exports = function(io) {
                         delete collaborations[sessionId];
                     }
                 }
+                // if not the last user, then let the rest user know userchange
                 for (let i = 0; i < participants.length; i++) {
                     io.to(participants[i]).emit("userchange", participants);
                 }
             }
 
+            //should not hit here, need to debug
             if(!foundAndRemoved) {
                 console.log("warning: could not find the socket.id in collaboration");
             }
