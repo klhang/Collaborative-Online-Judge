@@ -21,8 +21,8 @@ def build_and_run():
     # conver object to json format
     return jsonify(result)
 
-#main function
-#run program on command line:python executor_server.py will =>
+# main function
+# run program on command line:python executor_server.py will =>
 if __name__ == '__main__':
     #  load docker image
     eu.load_image()
