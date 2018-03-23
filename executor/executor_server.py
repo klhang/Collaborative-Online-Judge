@@ -1,12 +1,12 @@
 import json
-from flask import Flask
+from flask import Flask, jsonify, request
 app = Flask(__name__)
-from flask import jsonify
-from flask import request
+
 
 import executor_utils as eu
 
 @app.route('/build_and_run', methods=['POST'])
+
 def build_and_run():
     data = request.get_json()
     if 'code' not in data or 'lang' not in data:
@@ -14,18 +14,17 @@ def build_and_run():
 
     code = data['code']
     lang = data['lang']
-
+     # %s: string place holder
     print("API got called with code: %s in %s" % (code, lang))
 
     result = eu.build_and_run(code, lang)
-
+    # conver object to json format
     return jsonify(result)
 
 #main function
-#run program on command line:pythonexecutor_server.pywill
-
+#run program on command line:python executor_server.py will =>
 if __name__ == '__main__':
-    # load docker image
+    #  load docker image
     eu.load_image()
     # monitoring the code change and recompile
     app.run(debug=True)

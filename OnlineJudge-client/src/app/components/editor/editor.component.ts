@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit {
   language: string = 'Java';
 
   sessionId: string;
-  output: string = "";
+  output: string = ""; //for storing the build and run output
 
   users: string;
   subscriptionUsers: Subscription;
@@ -84,12 +84,14 @@ export class EditorComponent implements OnInit {
   submit(): void {
     let user_code = this.editor.getValue();
     console.log(user_code);
-
+    // create object that contains user's code and language
     const data = {
       user_code: user_code,
       lang: this.language.toLocaleLowerCase()
     };
 
+    // send the data to server
+    // build and run return a Promise
     this.dataService.buildAndRun(data)
       .then(res => {
         this.output = res;

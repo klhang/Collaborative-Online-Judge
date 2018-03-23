@@ -3,11 +3,15 @@ const router = express.Router();
 
 const problemService = require('../services/problemService');
 const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json(); // middleware, used to parse the body of the Post request
 
+// for node server to call the restful API
 const nodeRestClient = require('node-rest-client').Client;
 const restClient = new nodeRestClient();
+
+//python Flask server listen on port 5000 by default
 EXECUTOR_SERVER_URL = 'http://localhost:5000/build_and_run';
+// register a method
 restClient.registerMethod('build_and_run', EXECUTOR_SERVER_URL, 'POST');
 
 // Get all problems
@@ -44,11 +48,16 @@ router.post('/build_and_run', jsonParser, (req, res) => {
     console.log('lang:', lang, 'code:', userCode);
 
     restClient.methods.build_and_run(
-        {data: {code: userCode, lang: lang},
-        headers: {'Content-Type': 'application/json'}},
+        {
+          data: {code: userCode, lang: lang},
+          headers: {'Content-Type': 'application/json'}
+        },
+        //callback function
         (data, response) => {
+            // response: raw data, data: parsed response
             const text = `Build output: ${data['build']}, execute output: ${data['run']}`;
             console.log(text);
+            // res.json(data)
             res.json(text);
         }
     )

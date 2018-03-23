@@ -29,8 +29,8 @@ export class DataService {
   }
 
   addProblem(problem: Problem) {
-     // problem.id = this.problems.length + 1;
-     // this.problems.push(problem);
+    //define the content-Type in http request header
+    // Content-Type declears the body type when you issue a POST request
      const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
      return this.httpClient.post('api/v1/problems', problem, options)
        .toPromise()
@@ -53,10 +53,11 @@ export class DataService {
     }
 
     buildAndRun(data) : Promise<any> {
+      //define the content-Type in http request header
+      // Content-Type declears the body type when you issue a POST request
       const options = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
-
       return this.httpClient.post('api/v1/build_and_run', data, options)
-        .toPromise()
+        .toPromise() // convert observable to promise
         .then(res => {
           console.log(res);
           return res;
