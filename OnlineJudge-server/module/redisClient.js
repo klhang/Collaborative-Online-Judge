@@ -16,7 +16,7 @@ function set(key, value, callback) {
 }
 
 
-function get(key, call) {
+function get(key, callback) {
   client.get(key, function(err, res) {
     if (err) {
       console.log(err);

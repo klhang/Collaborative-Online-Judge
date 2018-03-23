@@ -11,15 +11,11 @@ module.exports = function(io) {
     var socketIdToSessionId = {};
 
     io.on('connection', (socket) => {
+      //sessionId is the problem number, socket.id is participant's individule id randomly assigned by redis
         let sessionId = socket.handshake.query['sessionId'];
 
         socketIdToSessionId[socket.id] = sessionId;
 
-        // if (!(sessionId in collaborations)) {
-        //     collaborations[sessionId] = {
-        //         'participants': []
-        //     };
-        // }
 
         if (sessionId in collaborations) {
             collaborations[sessionId]['participants'].push(socket.id);
@@ -45,6 +41,7 @@ module.exports = function(io) {
                         'participants': []
                     }
                 }
+                collaborations[sessionId]['participants'].push(socket.id);
                 io.to(socket.id).emit("userchange", socket.id);
             })
         }
@@ -59,6 +56,8 @@ module.exports = function(io) {
 
             if (sessionId in collaborations) {
                 let participants = collaborations[sessionId]['participants'];
+                console.log(collaborations)
+
                 for (let i = 0; i < participants.length; i++) {
                     if (socket.id != participants[i]) {
                         io.to(participants[i]).emit("change", delta);
@@ -129,3 +128,10 @@ module.exports = function(io) {
         })
     })
 }
+
+/// collaborations object looks like below:
+// restore buffer for session3 socket id: vq85nk7XjnFmoXRGAAAC
+// change 3 {"start":{"row":2,"column":36},"end":{"row":2,"column":37},"action":"insert","lines":["a"],"id":2}
+// { '3':
+//    { cachedInstructions: [ [Object] ],
+//      participants: [ 'vq85nk7XjnFmoXRGAAAC' ] } }
