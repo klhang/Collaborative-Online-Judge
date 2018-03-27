@@ -55,7 +55,7 @@ router.post('/build_and_run', jsonParser, (req, res) => {
         //callback function
         (data, response) => {
             // response: raw data, data: parsed response
-            const text = `Build output: ${data['build']}, execute output: ${data['run']}`;
+            const text = `${data['run']}`;
             console.log(text);
             // res.json(data)
             res.json(text);
