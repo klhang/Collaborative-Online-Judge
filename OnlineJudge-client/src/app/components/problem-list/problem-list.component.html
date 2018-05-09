@@ -1,7 +1,11 @@
 <div class="container">
+  <div>
+    <label>Coding Challenges</label>
+  </div>
   <div class="list-group">
     <a class="list-group-item" *ngFor="let problem of problems"
       [routerLink]="['/problems',	problem.id]">>
+
       <span class="{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}">
         {{problem.difficulty}}
       </span>
@@ -10,6 +14,6 @@
   </div>
 </div>
 
-<div class="container">
+<div>
   <app-new-problem></app-new-problem>
 </div>

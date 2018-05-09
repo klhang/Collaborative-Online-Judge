@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit {
   sessionId: string;
   output: string = ""; //for storing the build and run output
 
+  userList: string[];
   users: string;
   subscriptionUsers: Subscription;
 
@@ -56,6 +57,7 @@ export class EditorComponent implements OnInit {
     this.subscriptionUsers = this.collaboration.init(this.editor, this.sessionId)
       .subscribe(users => this.users = users);
 
+
     this.editor.lastAppliedChange = null;
 
     //register change callback
@@ -66,6 +68,10 @@ export class EditorComponent implements OnInit {
       }
 
     })
+
+    // if(this.users != null){
+    //   this.userList = this.users.split("");
+    // }
   }
 
   resetEditor(): void {
