@@ -6,4 +6,4 @@ CodeLab is  a collaborative online judge system, inspired by LeetCode. It suppor
 [Youtube Demo](https://youtu.be/R6WTv8ZoJwo)
 
 ## Architecture
-![Architecture](https://github.com/klhang/Collaborative-Online-Judge/tree/master/Docs/CodeLab%Arch%copy.png)
+![Architecture](https://github.com/klhang/Collaborative-Online-Judge/blob/master/Docs/CodeLab%20Arch%20copy.png)
