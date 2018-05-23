@@ -42,16 +42,6 @@ export class DataService {
        .catch(this.handleError);
    }
 
-    filterProblems(difficulty: string): Observable<Problem[]> {
-      this.httpClient.get('api/v1/problems')
-        .toPromise()
-        .then((res:any) => {
-          this._problemSource.next(res);
-        })
-        .catch(this.handleError);
-      return this._problemSource.asObservable();
-    }
-
     buildAndRun(data) : Promise<any> {
       //define the content-Type in http request header
       // Content-Type declears the body type when you issue a POST request
@@ -70,33 +60,3 @@ export class DataService {
     return Promise.reject(error.body || error);
   }
 }
-
-
-
-
-
-
-// @Injectable()
-// export class DataService {
-//
-//   problems: Problem[] = PROBLEMS;
-//
-//   constructor() { }
-//
-//   getProblems(): Problem[] {
-//     return this.problems;
-//   }
-//
-//   getProblem(id: number): Problem {
-//     return this.problems.find((problem) => problem.id === id);
-//   }
-//
-//   addProblme(problem: Problem) {
-//     problem.id = this.problems.length + 1;
-//     this.problems.push(problem);
-//   }
-//
-//   filterProblems(difficulty: string): Problem[] {
-//     return this.problems.filter((problem) => problem.difficulty === difficulty);
-//   }
-// }

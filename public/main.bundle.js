@@ -88,16 +88,19 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_problem_detail_problem_detail_component__ = __webpack_require__("../../../../../src/app/components/problem-detail/problem-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_new_problem_new_problem_component__ = __webpack_require__("../../../../../src/app/components/new-problem/new-problem.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_nav_bar_nav_bar_component__ = __webpack_require__("../../../../../src/app/components/nav-bar/nav-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_filter_problem_filter_problem_component__ = __webpack_require__("../../../../../src/app/components/filter-problem/filter-problem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_editor_editor_component__ = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services_collaboration_service__ = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_search_input_service__ = __webpack_require__("../../../../../src/app/services/search-input.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pipes_search_pipe__ = __webpack_require__("../../../../../src/app/pipes/search.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_editor_editor_component__ = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_collaboration_service__ = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -123,18 +126,21 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_7__components_problem_detail_problem_detail_component__["a" /* ProblemDetailComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__components_new_problem_new_problem_component__["a" /* NewProblemComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_nav_bar_nav_bar_component__["a" /* NavBarComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__components_filter_problem_filter_problem_component__["a" /* FilterProblemComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_editor_editor_component__["a" /* EditorComponent */]
+                __WEBPACK_IMPORTED_MODULE_11__pipes_search_pipe__["a" /* SearchPipe */],
+                __WEBPACK_IMPORTED_MODULE_13__components_editor_editor_component__["a" /* EditorComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_3__app_routes__["a" /* routing */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_11__angular_common_http__["b" /* HttpClientModule */]
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["c" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_12__angular_common_http__["b" /* HttpClientModule */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */],
-                __WEBPACK_IMPORTED_MODULE_13__services_collaboration_service__["a" /* CollaborationService */]
+                __WEBPACK_IMPORTED_MODULE_14__services_collaboration_service__["a" /* CollaborationService */],
+                __WEBPACK_IMPORTED_MODULE_10__services_search_input_service__["a" /* SearchInputService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
@@ -154,9 +160,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_problem_list_problem_list_component__ = __webpack_require__("../../../../../src/app/components/problem-list/problem-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_problem_detail_problem_detail_component__ = __webpack_require__("../../../../../src/app/components/problem-detail/problem-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_filter_problem_filter_problem_component__ = __webpack_require__("../../../../../src/app/components/filter-problem/filter-problem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_new_problem_new_problem_component__ = __webpack_require__("../../../../../src/app/components/new-problem/new-problem.component.ts");
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_new_problem_new_problem_component__ = __webpack_require__("../../../../../src/app/components/new-problem/new-problem.component.ts");
 
 
 
@@ -176,19 +180,15 @@ var routes = [
         component: __WEBPACK_IMPORTED_MODULE_2__components_problem_detail_problem_detail_component__["a" /* ProblemDetailComponent */]
     },
     {
-        path: 'filter/:difficulty',
-        component: __WEBPACK_IMPORTED_MODULE_3__components_filter_problem_filter_problem_component__["a" /* FilterProblemComponent */]
-    },
-    {
         path: 'new',
-        component: __WEBPACK_IMPORTED_MODULE_4__components_new_problem_new_problem_component__["a" /* NewProblemComponent */]
+        component: __WEBPACK_IMPORTED_MODULE_3__components_new_problem_new_problem_component__["a" /* NewProblemComponent */]
     },
     {
         path: '**',
         redirectTo: 'problems'
     }
 ];
-var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes);
+var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(routes);
 
 
 /***/ }),
@@ -324,85 +324,6 @@ var EditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/filter-problem/filter-problem.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".difficult\t{\n\t\tmin-width:\t65px;\n\t\tmargin-right:\t18px;\n}\n.label.difficulty\t{\n\t\tpadding-top:\t0.6em;\n\t\tcolor:\t#fbfdfa;\n\t\tfont-size:\t12px;\n}\n.title\t{\n\t\tfont-size:\t1.2em;\n}\n.diff-easy\t{\n\t\tbackground-color:\t#42ebf4;\n}\n.diff-medium\t{\n\t\tbackground-color:\t#92cf5c;\n}\n.diff-hard\t{\n\t\tbackground-color:\t#92a8d1;\n}\n.diff-super{\n\t\tbackground-color:\t#8d16e2;\n}\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/filter-problem/filter-problem.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container\" *ngIf=\"problems\">\n  <div class=\"container\">\n    <div class=\"list-group\">\n      <a class=\"list-group-item\" *ngFor=\"let problem of problems\"\n        [routerLink]=\"['/problems',\tproblem.id]\">>\n        <span class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n          {{problem.difficulty}}\n        </span>\n        <strong class=\"title\">{{problem.id}}.{{problem.name}}</strong>\n      </a>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/components/filter-problem/filter-problem.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterProblemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var FilterProblemComponent = /** @class */ (function () {
-    function FilterProblemComponent(dataService, route) {
-        this.dataService = dataService;
-        this.route = route;
-    }
-    FilterProblemComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params.subscribe(function (params) {
-            // this.problems = this.dataService.filterProblems(params['difficulty'])
-            _this.subscriptionProblems = _this.dataService.filterProblems(params['difficulty'])
-                .subscribe(function (problems) { return _this.problems = problems; });
-        });
-    };
-    FilterProblemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-filter-problem',
-            template: __webpack_require__("../../../../../src/app/components/filter-problem/filter-problem.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/components/filter-problem/filter-problem.component.css")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
-    ], FilterProblemComponent);
-    return FilterProblemComponent;
-}());
-
-// getProblems() {
-//   // this.problems = this.dataService.getProblems();
-//   this.subscriptionProblems = this.dataService.getProblems()
-//     .subscribe(problems => this.problems = problems);
-// }
-
-
-/***/ }),
-
 /***/ "../../../../../src/app/components/nav-bar/nav-bar.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -424,7 +345,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/nav-bar/nav-bar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <!-- <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button> -->\n      <a class=\"navbar-brand\" href=\"#\">\n        CodeLab\n      </a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li><a href=\"/problems\">All Problems<span class=\"sr-only\">(current)</span></a></li>\n        <li><a href=\"/new\">Creat Problem</a></li>\n        <!-- <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Select Difficulty <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"/filter/easy\">Easy</a></li>\n            <li><a href=\"/filter/medium\">medium</a></li>\n            <li><a href=\"/filter/hard\">Hard</a></li>\n            <li><a href=\"/filter/super\">Super</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">One more separated link</a></li>\n          </ul>\n        </li> -->\n      </ul>\n      <form class=\"navbar-form navbar-left\">\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n      </form>\n      <!-- <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul> -->\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
+module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n          <font color=\"#ffffff\"><b>CodeLab</b></font>\n      </a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n\n        <li>\n          <a href=\"#\" routerLink=\"/problems\">\n            All Problems<span class=\"sr-only\">(current)</span>\n          </a>\n        </li>\n\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Difficulty <span class=\"caret\"></span>\n          </a>\n          <ul class=\"dropdown-menu\">\n            <li>\n              <a *ngFor = \"let difficulty of difficulties\">\n                {{difficulty}}\n              </a>\n            </li>\n          </ul>\n        </li>\n\n        <li><a routerLink=\"/new\">Creat Problem</a></li>\n      </ul>\n\n\n      <form class=\"navbar-form navbar-left\" (ngSubmit) = \"searchProblems()\">\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search by keywords\"\n          [formControl]=\"searchBox\" [(ngModel)]=\"searchInput\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\"\n        (click)=\"searchProblems_btn()\">Search</button>\n      </form>\n      <!-- <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul> -->\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
 
 /***/ }),
 
@@ -434,6 +355,10 @@ module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-defa
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavBarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_debounceTime__ = __webpack_require__("../../../../rxjs/_esm5/add/operator/debounceTime.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_search_input_service__ = __webpack_require__("../../../../../src/app/services/search-input.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -444,12 +369,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-// import { Problem } from '../../models/problem.model';
-// import { DataService } from '../../services/data.service';
+
+
+
+
 var NavBarComponent = /** @class */ (function () {
-    function NavBarComponent() {
+    function NavBarComponent(inputService, router) {
+        this.inputService = inputService;
+        this.router = router;
+        this.searchInput = "";
+        this.difficultySearch = "";
+        this.searchBox = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormControl */]();
+        this.difficulties = ['easy', 'medium', 'hard', 'super'];
     }
     NavBarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.searchBox
+            .valueChanges
+            .debounceTime(200)
+            .subscribe(function (term) {
+            _this.inputService.changeInput(term);
+        });
+    };
+    NavBarComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+    };
+    NavBarComponent.prototype.searchProblems = function () {
+        this.router.navigate(['/problems']);
+    };
+    NavBarComponent.prototype.searchProblems_btn = function () {
+        this.inputService.changeInput(this.searchInput);
+        this.router.navigate(['/problems']);
+    };
+    NavBarComponent.prototype.difficultyFilter = function () {
+        this.inputService.changeInput(this.difficultySearch);
+        this.router.navigate(['/problems']);
     };
     NavBarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -457,7 +411,8 @@ var NavBarComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/components/nav-bar/nav-bar.component.html"),
             styles: [__webpack_require__("../../../../../src/app/components/nav-bar/nav-bar.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_search_input_service__["a" /* SearchInputService */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]])
     ], NavBarComponent);
     return NavBarComponent;
 }());
@@ -624,7 +579,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".label {\n\tfont-size: 16px;\n}\n.difficult\t{\n\t\tmin-width:\t65px;\n\t\tmargin-right:\t18px;\n}\n.label.difficulty\t{\n\t\tpadding-top:\t0.6em;\n\t\tcolor:\t#fbfdfa;\n\t\tfont-size:\t12px;\n}\n.title\t{\n\t\tfont-size:\t1.2em;\n}\n.diff-easy\t{\n\t\tbackground-color:\t#40bf80;\n}\n.diff-medium\t{\n\t\tbackground-color:\t#9999ff;\n}\n.diff-hard\t{\n\t\tbackground-color:\t#336699;\n}\n.diff-super{\n\t\tbackground-color:\t#ac3939;\n}\n", ""]);
+exports.push([module.i, ".difficulty {\n  min-width: 65px;\n  margin-right: 10px;\n}\n\n.label.difficulty {\n  padding-top: 0.2em;\n  color: #ffffff;\n  font-size: 13px;\n}\n\n.title {\n  font-size: 1.2em;\n}\n\n.diff-easy\t{\n\t\tbackground-color:\t#40bf80;\n}\n\n.diff-medium\t{\n\t\tbackground-color:\t#9999ff;\n}\n\n.diff-hard\t{\n\t\tbackground-color:\t#336699;\n}\n\n.diff-super{\n\t\tbackground-color:\t#ac3939;\n}\n", ""]);
 
 // exports
 
@@ -637,7 +592,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/problem-list/problem-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div>\n    <label>Coding Challenges</label>\n  </div>\n  <div>\n    <div class=\"list-group\">\n      <a class=\"list-group-item\" *ngFor=\"let problem of problems\"\n      [routerLink]=\"['/problems',\tproblem.id]\">>\n\n      <span class=\"tag is-medium {{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}.{{problem.name}}</strong>\n    </a>\n  </div>\n\n  </div>\n</div>\n\n<div>\n  <app-new-problem></app-new-problem>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div>\n    <label>Coding Challenges</label>\n  </div>\n  <div>\n    <div class=\"list-group\">\n      <a class=\"list-group-item\" *ngFor=\"let problem of (problems | search: searchTerm)\"\n      [routerLink]=\"['/problems',\tproblem.id]\">\n\n      <span class=\"tag is-medium {{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}.{{problem.name}}</strong>\n    </a>\n  </div>\n\n  </div>\n</div>\n\n<div>\n  <app-new-problem></app-new-problem>\n</div>\n"
 
 /***/ }),
 
@@ -648,6 +603,7 @@ module.exports = "<div class=\"container\">\n  <div>\n    <label>Coding Challeng
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProblemListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_search_input_service__ = __webpack_require__("../../../../../src/app/services/search-input.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -659,21 +615,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var ProblemListComponent = /** @class */ (function () {
-    function ProblemListComponent(dataService) {
+    function ProblemListComponent(dataService, inputService) {
         this.dataService = dataService;
+        this.inputService = inputService;
+        this.searchTerm = '';
     }
     ProblemListComponent.prototype.ngOnInit = function () {
         this.getProblems();
+        this.getSearchTerm();
     };
     ProblemListComponent.prototype.ngOnDestroy = function () {
         this.subscriptionProblems.unsubscribe();
     };
     ProblemListComponent.prototype.getProblems = function () {
         var _this = this;
-        // this.problems = this.dataService.getProblems();
         this.subscriptionProblems = this.dataService.getProblems()
             .subscribe(function (problems) { return _this.problems = problems; });
+    };
+    ProblemListComponent.prototype.getSearchTerm = function () {
+        var _this = this;
+        this.subscriptionInput = this.inputService.getInput()
+            .subscribe(function (inputTerm) { return _this.searchTerm = inputTerm; });
     };
     ProblemListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -681,9 +645,44 @@ var ProblemListComponent = /** @class */ (function () {
             template: __webpack_require__("../../../../../src/app/components/problem-list/problem-list.component.html"),
             styles: [__webpack_require__("../../../../../src/app/components/problem-list/problem-list.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_data_service__["a" /* DataService */],
+            __WEBPACK_IMPORTED_MODULE_2__services_search_input_service__["a" /* SearchInputService */]])
     ], ProblemListComponent);
     return ProblemListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/pipes/search.pipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var SearchPipe = /** @class */ (function () {
+    function SearchPipe() {
+    }
+    SearchPipe.prototype.transform = function (problems, term) {
+        console.log(problems);
+        return problems.filter(function (problem) { return (problem.name.toLowerCase().includes(term))
+            || problem.id === +term
+            || problem.difficulty === term; });
+    };
+    SearchPipe = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */])({
+            name: 'search'
+        })
+    ], SearchPipe);
+    return SearchPipe;
 }());
 
 
@@ -804,16 +803,6 @@ var DataService = /** @class */ (function () {
         })
             .catch(this.handleError);
     };
-    DataService.prototype.filterProblems = function (difficulty) {
-        var _this = this;
-        this.httpClient.get('api/v1/problems')
-            .toPromise()
-            .then(function (res) {
-            _this._problemSource.next(res);
-        })
-            .catch(this.handleError);
-        return this._problemSource.asObservable();
-    };
     DataService.prototype.buildAndRun = function (data) {
         //define the content-Type in http request header
         // Content-Type declears the body type when you issue a POST request
@@ -837,30 +826,45 @@ var DataService = /** @class */ (function () {
     return DataService;
 }());
 
-// @Injectable()
-// export class DataService {
-//
-//   problems: Problem[] = PROBLEMS;
-//
-//   constructor() { }
-//
-//   getProblems(): Problem[] {
-//     return this.problems;
-//   }
-//
-//   getProblem(id: number): Problem {
-//     return this.problems.find((problem) => problem.id === id);
-//   }
-//
-//   addProblme(problem: Problem) {
-//     problem.id = this.problems.length + 1;
-//     this.problems.push(problem);
-//   }
-//
-//   filterProblems(difficulty: string): Problem[] {
-//     return this.problems.filter((problem) => problem.difficulty === difficulty);
-//   }
-// }
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/search-input.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchInputService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__ = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SearchInputService = /** @class */ (function () {
+    function SearchInputService() {
+        this._inputSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_BehaviorSubject__["a" /* BehaviorSubject */]('');
+    }
+    SearchInputService.prototype.changeInput = function (term) {
+        this._inputSubject.next(term);
+    };
+    SearchInputService.prototype.getInput = function () {
+        return this._inputSubject.asObservable();
+    };
+    SearchInputService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [])
+    ], SearchInputService);
+    return SearchInputService;
+}());
+
 
 
 /***/ }),

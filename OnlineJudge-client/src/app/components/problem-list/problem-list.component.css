@@ -1,18 +1,17 @@
-.label {
-	font-size: 16px;
+.difficulty {
+  min-width: 65px;
+  margin-right: 10px;
 }
-.difficult	{
-		min-width:	65px;
-		margin-right:	18px;
+
+.label.difficulty {
+  padding-top: 0.2em;
+  color: #ffffff;
+  font-size: 13px;
 }
-.label.difficulty	{
-		padding-top:	0.6em;
-		color:	#fbfdfa;
-		font-size:	12px;
-}
-.title	{
-		font-size:	1.2em;
-}
+
+.title {
+  font-size: 1.2em;
+}  
 .diff-easy	{
 		background-color:	#40bf80;
 }

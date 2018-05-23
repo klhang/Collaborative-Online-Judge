@@ -10,7 +10,7 @@ import { SearchInputService } from '../../services/search-input.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavBarComponent implements OnInit {
 
   searchInput: string = "";
   difficultySearch: string = "";
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   searchBox: FormControl = new FormControl();
   subscription: Subscription;
 
-  difficulties: string[] = ['easy', 'medium', 'hard', 'ultimate'];
+  difficulties: string[] = ['easy', 'medium', 'hard', 'super'];
 
   constructor(private inputService: SearchInputService,
               private router: Router) { }
