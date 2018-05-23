@@ -34,10 +34,7 @@ export class EditorComponent implements OnInit {
         // Type your Java code here.
       }
     }`,
-    'Python': `class solution:
-      def example():
-        # write your python code here.
-    `
+    'Python': `# write your python code here.`
   }
 
   ngOnInit() {

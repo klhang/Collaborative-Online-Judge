@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER klhang
+MAINTAINER ec2-user
 
 
 RUN apt-get update

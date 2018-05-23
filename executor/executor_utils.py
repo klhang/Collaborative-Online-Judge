@@ -9,7 +9,7 @@ from docker.errors import ImageNotFound
 
 #get current directory
 CURRENT_DIR = os.path.dirname(os.path.relpath(__file__))
-IMAGE_NAME = 'klhang/collaborative_online_judge' # user the image created
+IMAGE_NAME = 'ec2-user/collaborative_online_judge' # user the image created
 
 client = docker.from_env()
 
