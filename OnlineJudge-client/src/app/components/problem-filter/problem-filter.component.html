@@ -1,4 +1,7 @@
 <div class="container">
+  <div>
+    <label>Coding Challenges</label>
+  </div>
   <div class="list-group">
     <a class="list-group-item" *ngFor="let problem of problems" [routerLink]="['/problems', problem.id]">
       <span

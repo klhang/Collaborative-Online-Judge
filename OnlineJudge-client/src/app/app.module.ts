@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditorComponent } from './components/editor/editor.component';
 
 import { CollaborationService } from './services/collaboration.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CollaborationService } from './services/collaboration.service';
     ProblemFilterComponent,
     SearchPipe,
     EditorComponent,
+    FooterComponent,
 
   ],
   imports: [

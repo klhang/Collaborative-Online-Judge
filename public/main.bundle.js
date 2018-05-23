@@ -94,12 +94,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_editor_editor_component__ = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_collaboration_service__ = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_footer_footer_component__ = __webpack_require__("../../../../../src/app/components/footer/footer.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -131,6 +133,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_10__components_problem_filter_problem_filter_component__["a" /* ProblemFilterComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__pipes_search_pipe__["a" /* SearchPipe */],
                 __WEBPACK_IMPORTED_MODULE_14__components_editor_editor_component__["a" /* EditorComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_footer_footer_component__["a" /* FooterComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -333,7 +336,7 @@ var EditorComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/components/nav-bar/nav-bar.component.css":
+/***/ "../../../../../src/app/components/footer/footer.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -351,10 +354,71 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/footer/footer.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<!-- Footer -->\n<footer class=\"page-footer font-small unique-color-dark mt-4\">\n\n  <div style=\"background-color: #2d2c33;\">\n    <div class=\"container\">\n\n      <!-- Grid row-->\n      <div class=\"row py-4 d-flex align-items-center\">\n\n        <!-- Grid column -->\n        <div class=\"col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0\">\n          <h6 class=\"mb-0\">@2018 CopyRight: ChrisGuan</h6>\n        </div>\n        <!-- Grid column -->\n\n      </div>\n      <!-- Grid row-->\n\n    </div>\n  </div>\n\n  <!-- Footer Links -->\n   <div class=\"container text-center text-md-left mt-5\">\n\n     <!-- Grid row -->\n     <div class=\"row mt-3\">\n\n       <!-- Grid column -->\n       <div class=\"col-md-3 col-lg-4 col-xl-3 mx-auto mb-4\">\n         <a class=\"text-uppercase font-weight-bold\" href=\"https://www.chrisguan.com\" font-size=h6>Personal Profile</a>\n       </div>\n       <div class=\"col-md-3 col-lg-4 col-xl-3 mx-auto mb-4\">\n         <a class=\"text-uppercase font-weight-bold\" href=\"https://www.linkedin.com/in/chris-guan\" font-size=h6>Linkedin</a>\n       </div>\n       <div class=\"col-md-3 col-lg-4 col-xl-3 mx-auto mb-4\">\n         <a class=\"text-uppercase font-weight-bold\" href=\"https://github.com/klhang\" font-size=h6>Github</a>\n       </div>\n\n\n     </div>\n     <!-- Grid row -->\n\n   </div>\n   <!-- Footer Links -->\n\n  <!-- Copyright -->\n  <div class=\"footer-copyright text-center py-3\">© 2018 Copyright:\n    <a href=\"https://www.chrisguan.com\"> ChrisGuan.com</a>\n  </div>\n  <!-- Copyright -->\n\n</footer>\n<!-- Footer -->\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/footer/footer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FooterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var FooterComponent = /** @class */ (function () {
+    function FooterComponent() {
+    }
+    FooterComponent.prototype.ngOnInit = function () {
+    };
+    FooterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-footer',
+            template: __webpack_require__("../../../../../src/app/components/footer/footer.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/footer/footer.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], FooterComponent);
+    return FooterComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/nav-bar/nav-bar.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "a.navbar-brand {\n    color: #2d2c33;\n    font-family: \"Comic Sans MS\", cursive, sans-serif;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/nav-bar/nav-bar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n          <font color=\"#ffffff\"><b>CodeLab</b></font>\n      </a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li>\n          <a href=\"#\" routerLink=\"/problems\">\n            All Problems<span class=\"sr-only\">(current)</span>\n          </a>\n        </li>\n\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Difficulty <span class=\"caret\"></span>\n          </a>\n          <ul class=\"dropdown-menu\">\n            <li><a routerLink=\"/problemsFilter/easy\">Easy</a></li>\n            <li><a routerLink=\"/problemsFilter/medium\">Medium</a></li>\n            <li><a routerLink=\"/problemsFilter/hard\">Hard</a></li>\n            <li><a routerLink=\"/problemsFilter/super\">Super</a></li>\n          </ul>\n        </li>\n\n        <li><a routerLink=\"/new\">Creat Problem</a></li>\n      </ul>\n\n\n      <form class=\"navbar-form navbar-left\" (ngSubmit) = \"searchProblems()\">\n\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search by keywords\"\n          [formControl]=\"searchBox\" [(ngModel)]=\"searchInput\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-default\"\n        (click)=\"searchProblems_btn()\">\n        Search\n        </button>\n      </form>\n\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul>\n\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
+module.exports = "<header class=\"masthead\">\n  <div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-sm-6\">\n      <h3><a href=\"#\" title=\"scroll down for your viewing pleasure\">A Collaborative Online Coding System.</a></h3>\n    </div>\n  </div>\n  </div>\n</header>\n\n\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">CodeLab</a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li>\n          <a href=\"#\" routerLink=\"/problems\">\n            All Problems<span class=\"sr-only\">(current)</span>\n          </a>\n        </li>\n\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Difficulty <span class=\"caret\"></span>\n          </a>\n          <ul class=\"dropdown-menu\">\n            <li><a routerLink=\"/problemsFilter/easy\">Easy</a></li>\n            <li><a routerLink=\"/problemsFilter/medium\">Medium</a></li>\n            <li><a routerLink=\"/problemsFilter/hard\">Hard</a></li>\n            <li><a routerLink=\"/problemsFilter/super\">Super</a></li>\n          </ul>\n        </li>\n\n        <li><a routerLink=\"/new\">Creat Problem</a></li>\n      </ul>\n\n\n      <form class=\"navbar-form navbar-left\" (ngSubmit) = \"searchProblems()\">\n\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search by keywords\"\n          [formControl]=\"searchBox\" [(ngModel)]=\"searchInput\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-default\"\n        (click)=\"searchProblems_btn()\">\n        Search\n        </button>\n      </form>\n\n      <ul class=\"nav navbar-nav navbar-right\">\n        <!-- <li><a href=\"#\">Random Pick</a></li> -->\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"> More <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Main Page</a></li>\n            <li><a routerLink=\"/new\">Create Problem</a></li>\n            <!-- <li><a href=\"#\">Something else here</a></li> -->\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"https://www.chrisguan.com\">Personal Profile</a></li>\n            <li><a href=\"https://www.linkedin.com/in/chris-guan\">Linkedin</a></li>\n            <li><a href=\"https://github.com/klhang\">Github</a></li>\n          </ul>\n        </li>\n      </ul>\n\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
 
 /***/ }),
 
@@ -451,7 +515,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/new-problem/new-problem.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\t<div>\n\t\t\t<form #formRef=\"ngForm\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"problemName\">Problem\tName</label>\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"problemName\"\n\t\t\t\t\t\t\t\t\tname=\"problemName\" placeholder=\"Input\tproblem\tname\" required\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.name\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"problemDesc\">Problem\tDescription</label>\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"problemDesc\"\n\t\t\t\t\t\t\t\t\tname=\"problemDesc\" placeholder=\"Input\tdescription\" required\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.desc\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"difficulty\">Difficulty</label>\n\t\t\t\t\t\t\t<select class=\"form-control\" id=\"difficulty\" name=\"difficulty\"\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.difficulty\">\n\t\t\t\t\t\t\t\t\t<option *ngFor=\"let\tdifficulty\tof\tdifficulties\" [value]=\"difficulty\">\n\t\t\t\t\t\t\t\t\t\t\t{{difficulty}}\n\t\t\t\t\t\t\t\t\t</option>\n\t\t\t\t\t\t\t</select>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t<div class=\"col-md-12\">\n\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn\tbtn-primary\tpull-right\"\n\t\t\t\t\t\t\t\t\t\t\t(click)=\"addProblem()\">Add\tproblem</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t</form>\n\t</div>\n\n</div>\n"
+module.exports = "<div class=\"container\">\n\t<div>\n\t\t\t<form #formRef=\"ngForm\">\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"problemName\">Problem\tName</label>\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"problemName\"\n\t\t\t\t\t\t\t\t\tname=\"problemName\" placeholder=\"Input\tproblem\tname\" required\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.name\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"problemDesc\">Problem\tDescription</label>\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"problemDesc\"\n\t\t\t\t\t\t\t\t\tname=\"problemDesc\" placeholder=\"Input\tdescription\" required\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.desc\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t<label for=\"difficulty\">Difficulty</label>\n\t\t\t\t\t\t\t<select class=\"form-control\" id=\"difficulty\" name=\"difficulty\"\n\t\t\t\t\t\t\t\t\t[(ngModel)]=\"newProblem.difficulty\">\n\t\t\t\t\t\t\t\t\t<option *ngFor=\"let\tdifficulty\tof\tdifficulties\" [value]=\"difficulty\">\n\t\t\t\t\t\t\t\t\t\t\t{{difficulty}}\n\t\t\t\t\t\t\t\t\t</option>\n\t\t\t\t\t\t\t</select>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"row\">\n\t\t\t\t\t\t\t<div class=\"col-md-12\">\n\t\t\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn\tbtn-primary\tpull-right\"\n\t\t\t\t\t\t\t\t\t\t\t(click)=\"addProblem()\">Add\tproblem</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<p class=\"ex1\"></p>\n\t\t\t</form>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -483,7 +547,7 @@ var NewProblemComponent = /** @class */ (function () {
     function NewProblemComponent(dataService) {
         this.dataService = dataService;
         this.newProblem = Object.assign({}, DEFAULT_PROBLEM);
-        this.difficulties = ['easy ', 'medium', 'hard ', 'super'];
+        this.difficulties = ['easy', 'medium', 'hard', 'super'];
     }
     NewProblemComponent.prototype.ngOnInit = function () {
     };
@@ -527,7 +591,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/problem-detail/problem-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"problem\">\n\t\t<div class=\"col-sm-12\tcol-md-4\">\n        <div>\n\t\t\t\t\t\t<h2>\n\t\t\t\t\t\t\t\t{{problem.id}}.{{problem.name}}\n\t\t\t\t\t\t</h2>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t{{problem.desc}}\n\t\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"hidden-xs col-sm-12 col-md-8\">\n\t\t\t<app-editor></app-editor>\n\t\t</div>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"problem\">\n\t\t<div class=\"col-sm-12\tcol-md-4\">\n        <div>\n\t\t\t\t\t\t<h2>\n\t\t\t\t\t\t\t\t{{problem.id}}.{{problem.name}}\n\t\t\t\t\t\t</h2>\n\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t{{problem.desc}}\n\t\t\t\t\t\t</p>\n\t\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"col-sm-12 col-md-8\">\n\t\t\t<app-editor></app-editor>\n\t\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -601,7 +665,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/problem-filter/problem-filter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"list-group\">\n    <a class=\"list-group-item\" *ngFor=\"let problem of problems\" [routerLink]=\"['/problems', problem.id]\">\n      <span\n         class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n            {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}. {{problem.name}}</strong>\n    </a>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <div>\n    <label>Coding Challenges</label>\n  </div>\n  <div class=\"list-group\">\n    <a class=\"list-group-item\" *ngFor=\"let problem of problems\" [routerLink]=\"['/problems', problem.id]\">\n      <span\n         class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n            {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}. {{problem.name}}</strong>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -676,7 +740,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/problem-list/problem-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div>\n    <label>Coding Challenges</label>\n  </div>\n  <div>\n    <div class=\"list-group\">\n      <a class=\"list-group-item\" *ngFor=\"let problem of (problems | search: searchTerm)\"\n      [routerLink]=\"['/problems',\tproblem.id]\">\n\n      <span class=\"tag is-medium {{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}.{{problem.name}}</strong>\n    </a>\n  </div>\n\n  </div>\n</div>\n\n<div>\n  <app-new-problem></app-new-problem>\n</div>\n"
+module.exports = "\n<div class=\"container\">\n  <div>\n    <label>Coding Challenges</label>\n  </div>\n  <div>\n    <div class=\"list-group\">\n      <a class=\"list-group-item\" *ngFor=\"let problem of (problems | search: searchTerm)\"\n      [routerLink]=\"['/problems',\tproblem.id]\">\n\n      <span class=\"tag is-medium {{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n        {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}.{{problem.name}}</strong>\n    </a>\n  </div>\n\n  </div>\n</div>\n\n\n\n<div>\n  <app-new-problem></app-new-problem>\n</div>\n\n<div>\n  <app-footer></app-footer>\n</div>\n"
 
 /***/ }),
 
