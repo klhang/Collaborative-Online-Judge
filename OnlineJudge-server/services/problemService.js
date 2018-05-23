@@ -62,6 +62,19 @@ const getProblem = function(id) {
     });
 }
 
+const getProblemsByDifficulty = function(difficulty) {
+
+    return new Promise((resolve, reject) => {
+        ProblemModel.find({difficulty : difficulty}, (err, problems) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(problems);
+            }
+        });
+    });
+}
+
 // add a problem
 const addProblem = function(newProblem) {
     // return new Promise((resolve, reject) => {
@@ -96,5 +109,6 @@ const addProblem = function(newProblem) {
 module.exports = {
     getProblems,
     getProblem,
+    getProblemsByDifficulty,
     addProblem
 }

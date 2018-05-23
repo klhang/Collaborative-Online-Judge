@@ -27,6 +27,12 @@ router.get('/problems/:id', (req, res) => {
         .then(problem => res.json(problem));
 });
 
+router.get('/problemsByDifficulty/:difficulty', function (req, res) {
+    const difficulty = req.params.difficulty;
+    problemService.getProblemsByDifficulty(difficulty)
+    .then(problem => res.json(problem));
+});
+
 // post problem
 router.post('/problems', jsonParser, (req, res) => {
     problemService.addProblem(req.body)

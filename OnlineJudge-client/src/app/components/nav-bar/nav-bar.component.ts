@@ -42,7 +42,7 @@ export class NavBarComponent implements OnInit {
 
   searchProblems_btn(): void {
     this.inputService.changeInput(this.searchInput);
-    this.router.navigate(['/problems']);
+    // this.router.navigate(['/problems']);
   }
 
   difficultyFilter(): void {

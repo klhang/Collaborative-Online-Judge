@@ -88,17 +88,19 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_problem_detail_problem_detail_component__ = __webpack_require__("../../../../../src/app/components/problem-detail/problem-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_new_problem_new_problem_component__ = __webpack_require__("../../../../../src/app/components/new-problem/new-problem.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_nav_bar_nav_bar_component__ = __webpack_require__("../../../../../src/app/components/nav-bar/nav-bar.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_search_input_service__ = __webpack_require__("../../../../../src/app/services/search-input.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pipes_search_pipe__ = __webpack_require__("../../../../../src/app/pipes/search.pipe.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_editor_editor_component__ = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_collaboration_service__ = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_problem_filter_problem_filter_component__ = __webpack_require__("../../../../../src/app/components/problem-filter/problem-filter.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__services_search_input_service__ = __webpack_require__("../../../../../src/app/services/search-input.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pipes_search_pipe__ = __webpack_require__("../../../../../src/app/pipes/search.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_editor_editor_component__ = __webpack_require__("../../../../../src/app/components/editor/editor.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_collaboration_service__ = __webpack_require__("../../../../../src/app/services/collaboration.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -126,8 +128,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_7__components_problem_detail_problem_detail_component__["a" /* ProblemDetailComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__components_new_problem_new_problem_component__["a" /* NewProblemComponent */],
                 __WEBPACK_IMPORTED_MODULE_9__components_nav_bar_nav_bar_component__["a" /* NavBarComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__pipes_search_pipe__["a" /* SearchPipe */],
-                __WEBPACK_IMPORTED_MODULE_13__components_editor_editor_component__["a" /* EditorComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__components_problem_filter_problem_filter_component__["a" /* ProblemFilterComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__pipes_search_pipe__["a" /* SearchPipe */],
+                __WEBPACK_IMPORTED_MODULE_14__components_editor_editor_component__["a" /* EditorComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -135,12 +138,12 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["b" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["c" /* ReactiveFormsModule */],
-                __WEBPACK_IMPORTED_MODULE_12__angular_common_http__["b" /* HttpClientModule */]
+                __WEBPACK_IMPORTED_MODULE_13__angular_common_http__["b" /* HttpClientModule */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */],
-                __WEBPACK_IMPORTED_MODULE_14__services_collaboration_service__["a" /* CollaborationService */],
-                __WEBPACK_IMPORTED_MODULE_10__services_search_input_service__["a" /* SearchInputService */]
+                __WEBPACK_IMPORTED_MODULE_15__services_collaboration_service__["a" /* CollaborationService */],
+                __WEBPACK_IMPORTED_MODULE_11__services_search_input_service__["a" /* SearchInputService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
         })
@@ -161,6 +164,8 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_problem_list_problem_list_component__ = __webpack_require__("../../../../../src/app/components/problem-list/problem-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_problem_detail_problem_detail_component__ = __webpack_require__("../../../../../src/app/components/problem-detail/problem-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_new_problem_new_problem_component__ = __webpack_require__("../../../../../src/app/components/new-problem/new-problem.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_problem_filter_problem_filter_component__ = __webpack_require__("../../../../../src/app/components/problem-filter/problem-filter.component.ts");
+
 
 
 
@@ -178,6 +183,10 @@ var routes = [
     {
         path: 'problems/:id',
         component: __WEBPACK_IMPORTED_MODULE_2__components_problem_detail_problem_detail_component__["a" /* ProblemDetailComponent */]
+    },
+    {
+        path: 'problemsFilter/:difficulty',
+        component: __WEBPACK_IMPORTED_MODULE_4__components_problem_filter_problem_filter_component__["a" /* ProblemFilterComponent */]
     },
     {
         path: 'new',
@@ -345,7 +354,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/nav-bar/nav-bar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n          <font color=\"#ffffff\"><b>CodeLab</b></font>\n      </a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n\n        <li>\n          <a href=\"#\" routerLink=\"/problems\">\n            All Problems<span class=\"sr-only\">(current)</span>\n          </a>\n        </li>\n\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Difficulty <span class=\"caret\"></span>\n          </a>\n          <ul class=\"dropdown-menu\">\n            <li>\n              <a *ngFor = \"let difficulty of difficulties\">\n                {{difficulty}}\n              </a>\n            </li>\n          </ul>\n        </li>\n\n        <li><a routerLink=\"/new\">Creat Problem</a></li>\n      </ul>\n\n\n      <form class=\"navbar-form navbar-left\" (ngSubmit) = \"searchProblems()\">\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search by keywords\"\n          [formControl]=\"searchBox\" [(ngModel)]=\"searchInput\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-default\"\n        (click)=\"searchProblems_btn()\">Search</button>\n      </form>\n      <!-- <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul> -->\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
+module.exports = "\n<div class=\"container\">\n  <nav class=\"navbar navbar-default\">\n  <div class=\"container-fluid\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\" aria-expanded=\"false\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n          <font color=\"#ffffff\"><b>CodeLab</b></font>\n      </a>\n    </div>\n\n    <!-- Collect the nav links, forms, and other content for toggling -->\n    <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n      <ul class=\"nav navbar-nav\">\n        <li>\n          <a href=\"#\" routerLink=\"/problems\">\n            All Problems<span class=\"sr-only\">(current)</span>\n          </a>\n        </li>\n\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n            Difficulty <span class=\"caret\"></span>\n          </a>\n          <ul class=\"dropdown-menu\">\n            <li><a routerLink=\"/problemsFilter/easy\">Easy</a></li>\n            <li><a routerLink=\"/problemsFilter/medium\">Medium</a></li>\n            <li><a routerLink=\"/problemsFilter/hard\">Hard</a></li>\n            <li><a routerLink=\"/problemsFilter/super\">Super</a></li>\n          </ul>\n        </li>\n\n        <li><a routerLink=\"/new\">Creat Problem</a></li>\n      </ul>\n\n\n      <form class=\"navbar-form navbar-left\" (ngSubmit) = \"searchProblems()\">\n\n        <div class=\"form-group\">\n          <input type=\"text\" class=\"form-control\" placeholder=\"Search by keywords\"\n          [formControl]=\"searchBox\" [(ngModel)]=\"searchInput\">\n        </div>\n\n        <button type=\"submit\" class=\"btn btn-default\"\n        (click)=\"searchProblems_btn()\">\n        Search\n        </button>\n      </form>\n\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Link</a></li>\n        <li class=\"dropdown\">\n          <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Dropdown <span class=\"caret\"></span></a>\n          <ul class=\"dropdown-menu\">\n            <li><a href=\"#\">Action</a></li>\n            <li><a href=\"#\">Another action</a></li>\n            <li><a href=\"#\">Something else here</a></li>\n            <li role=\"separator\" class=\"divider\"></li>\n            <li><a href=\"#\">Separated link</a></li>\n          </ul>\n        </li>\n      </ul>\n\n    </div><!-- /.navbar-collapse -->\n  </div><!-- /.container-fluid -->\n</nav>\n</div>\n\n\n<!--\n<nav class=\"navbar\" role=\"navigation\" aria-label=\"main navigation\">\n  <div class=\"navbar-brand\">\n    <a class=\"navbar-item\" href=\"#\">\n      <img src=\"http://res.cloudinary.com/klhang/image/upload/v1526002877/CodeLab/Logo.png\" alt=\"CodeLab: A Collaborative Online Coding Platform\" width=\"150\" height=\"40\">\n    </a>\n\n    <a role=\"button\" class=\"navbar-burger\" aria-label=\"menu\" aria-expanded=\"false\">\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n      <span aria-hidden=\"true\"></span>\n    </a>\n  </div>\n</nav> -->\n"
 
 /***/ }),
 
@@ -399,7 +408,7 @@ var NavBarComponent = /** @class */ (function () {
     };
     NavBarComponent.prototype.searchProblems_btn = function () {
         this.inputService.changeInput(this.searchInput);
-        this.router.navigate(['/problems']);
+        // this.router.navigate(['/problems']);
     };
     NavBarComponent.prototype.difficultyFilter = function () {
         this.inputService.changeInput(this.difficultySearch);
@@ -565,6 +574,81 @@ var ProblemDetailComponent = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
     ], ProblemDetailComponent);
     return ProblemDetailComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/problem-filter/problem-filter.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".difficulty {\n  min-width: 65px;\n  margin-right: 10px;\n}\n\n.label.difficulty {\n  padding-top: 0.2em;\n  color: #ffffff;\n  font-size: 13px;\n}\n\n.title {\n  font-size: 1.2em;\n}\n\n.diff-easy\t{\n\t\tbackground-color:\t#40bf80;\n}\n\n.diff-medium\t{\n\t\tbackground-color:\t#9999ff;\n}\n\n.diff-hard\t{\n\t\tbackground-color:\t#336699;\n}\n\n.diff-super{\n\t\tbackground-color:\t#ac3939;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/problem-filter/problem-filter.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"list-group\">\n    <a class=\"list-group-item\" *ngFor=\"let problem of problems\" [routerLink]=\"['/problems', problem.id]\">\n      <span\n         class=\"{{'pull-left label difficulty diff-' + problem.difficulty.toLocaleLowerCase()}}\">\n            {{problem.difficulty}}\n      </span>\n      <strong class=\"title\">{{problem.id}}. {{problem.name}}</strong>\n    </a>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/problem-filter/problem-filter.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProblemFilterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_data_service__ = __webpack_require__("../../../../../src/app/services/data.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ProblemFilterComponent = /** @class */ (function () {
+    function ProblemFilterComponent(dataService, route) {
+        this.dataService = dataService;
+        this.route = route;
+    }
+    ProblemFilterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.subscriptionProblems = _this.dataService.getProblemByDifficulty(params['difficulty'])
+                .subscribe(function (problems) { return _this.problems = problems; });
+        });
+    };
+    ProblemFilterComponent.prototype.ngOnDestroy = function () {
+        this.subscriptionProblems.unsubscribe();
+    };
+    ProblemFilterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-problem-filter',
+            template: __webpack_require__("../../../../../src/app/components/problem-filter/problem-filter.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/components/problem-filter/problem-filter.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_data_service__["a" /* DataService */], __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]])
+    ], ProblemFilterComponent);
+    return ProblemFilterComponent;
 }());
 
 
@@ -773,6 +857,7 @@ var DataService = /** @class */ (function () {
     function DataService(httpClient) {
         this.httpClient = httpClient;
         this._problemSource = new __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__["a" /* BehaviorSubject */]([]);
+        this._problemsByDifficulty = new __WEBPACK_IMPORTED_MODULE_2_rxjs_BehaviorSubject__["a" /* BehaviorSubject */]([]);
     }
     DataService.prototype.getProblems = function () {
         var _this = this;
@@ -789,6 +874,17 @@ var DataService = /** @class */ (function () {
             .toPromise()
             .then(function (res) { return res; })
             .catch(this.handleError);
+    };
+    DataService.prototype.getProblemByDifficulty = function (difficulty) {
+        var _this = this;
+        //return this.problems.filter( (problem) => problem.difficulty === difficulty);
+        this.httpClient.get("api/v1/problemsByDifficulty/" + difficulty)
+            .toPromise()
+            .then(function (res) {
+            _this._problemsByDifficulty.next(res);
+        })
+            .catch(this.handleError);
+        return this._problemsByDifficulty.asObservable();
     };
     DataService.prototype.addProblem = function (problem) {
         var _this = this;

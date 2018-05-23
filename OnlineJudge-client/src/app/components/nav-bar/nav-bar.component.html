@@ -18,7 +18,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
         <li>
           <a href="#" routerLink="/problems">
             All Problems<span class="sr-only">(current)</span>
@@ -30,11 +29,10 @@
             Difficulty <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li>
-              <a *ngFor = "let difficulty of difficulties">
-                {{difficulty}}
-              </a>
-            </li>
+            <li><a routerLink="/problemsFilter/easy">Easy</a></li>
+            <li><a routerLink="/problemsFilter/medium">Medium</a></li>
+            <li><a routerLink="/problemsFilter/hard">Hard</a></li>
+            <li><a routerLink="/problemsFilter/super">Super</a></li>
           </ul>
         </li>
 
@@ -43,16 +41,19 @@
 
 
       <form class="navbar-form navbar-left" (ngSubmit) = "searchProblems()">
+
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search by keywords"
           [formControl]="searchBox" [(ngModel)]="searchInput">
         </div>
+
         <button type="submit" class="btn btn-default"
         (click)="searchProblems_btn()">
         Search
         </button>
       </form>
-      <!-- <ul class="nav navbar-nav navbar-right">
+
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -64,7 +65,8 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-      </ul> -->
+      </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

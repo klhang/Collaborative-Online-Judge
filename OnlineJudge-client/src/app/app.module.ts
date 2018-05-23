@@ -12,6 +12,7 @@ import { ProblemListComponent } from './components/problem-list/problem-list.com
 import { ProblemDetailComponent } from './components/problem-detail/problem-detail.component';
 import { NewProblemComponent } from './components/new-problem/new-problem.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ProblemFilterComponent } from './components/problem-filter/problem-filter.component';
 import { SearchInputService } from './services/search-input.service';
 import { SearchPipe } from './pipes/search.pipe';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,7 @@ import { CollaborationService } from './services/collaboration.service';
     ProblemDetailComponent,
     NewProblemComponent,
     NavBarComponent,
+    ProblemFilterComponent,
     SearchPipe,
     EditorComponent,
 
